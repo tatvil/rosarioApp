@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="azulceleste">#89CFF0</color> <!-- Para la paz y la reflexión. -->
+    <color name="azuloscuro">#4682B4</color> <!-- Para un toque de profundidad y serenidad. -->
+    <color name="blancopuro">#FFFFFF</color> <!-- Para máxima claridad y legibilidad del texto. -->
+    <color name="negrosuave">#333333</color> <!-- Para un contraste suave y elegante. -->
+</resources>
