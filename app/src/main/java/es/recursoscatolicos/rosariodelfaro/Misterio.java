@@ -1,20 +1,17 @@
 package es.recursoscatolicos.rosariodelfaro;
 
-// Definición de la clase Misterio
 public class Misterio {
     private String nombre;
-    private int imagenResId; // ID del recurso de la imagen (ej: R.drawable.misterio1)
-    private String descripcion;
-    // Puedes añadir una lista de oraciones específicas si lo necesitas en el futuro
-    // private List<String> oraciones;
+    private int imagenResId;
+    private String meditation; // Nuevo campo para la meditación
 
-    public Misterio(String nombre, int imagenResId, String descripcion) {
+    // Constructor actualizado para incluir la meditación
+    public Misterio(String nombre, int imagenResId, String meditation) {
         this.nombre = nombre;
         this.imagenResId = imagenResId;
-        this.descripcion = descripcion;
+        this.meditation = meditation;
     }
 
-    // Getters
     public String getNombre() {
         return nombre;
     }
@@ -23,7 +20,8 @@ public class Misterio {
         return imagenResId;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    // Nuevo método getter para la meditación
+    public String getMeditation() {
+        return meditation;
     }
 }

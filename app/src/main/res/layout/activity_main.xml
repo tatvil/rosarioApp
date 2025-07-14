@@ -7,19 +7,8 @@
     android:background="@color/blancopuro"
     tools:context=".MainActivity">
 
-    <ImageView
-        android:id="@+id/image_misterio"
-        android:layout_width="0dp"
-        android:layout_height="420dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/placeholder_misterio"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="Imagen del misterio actual" />
-
     <TextView
-        android:id="@+id/text_nombre_misterio"
+        android:id="@+id/text_misterios"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@color/azuloscuro"
@@ -27,7 +16,31 @@
         android:textColor="@android:color/white"
         android:textSize="24sp"
         android:textStyle="bold"
-        android:text="Primer Misterio Gozoso: La Anunciación"
+        android:gravity="center"
+        android:text="Misterios Gozosos"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/image_misterio"
+        android:layout_width="0dp"
+        android:layout_height="320dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/gozosos1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_misterios"  /> <TextView
+        android:id="@+id/text_nombre_misterio"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="#80000000"
+        android:padding="16dp"
+        android:textColor="@android:color/white"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:text="1º Misterio: La Anunciación"
         app:layout_constraintBottom_toBottomOf="@+id/image_misterio"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -39,66 +52,41 @@
         android:layout_marginTop="24dp"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
-        android:text="Ave María"
+        android:text="Dios te salve, María..."
         android:textColor="@android:color/black"
+        android:textAlignment="center"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/image_misterio" />
 
+
     <LinearLayout
         android:id="@+id/layout_progreso_rosario"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:textAlignment="center"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_oracion_actual">
 
-        <TextView
-            android:id="@+id/text_progreso_rosario"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:text="Misterio 1/5"
-            android:textColor="@android:color/darker_gray"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_oracion_actual" />
 
-        <TextView
-            android:id="@+id/text_cuenta_rosario"
-            android:layout_width="200dp"
+        <LinearLayout
+            android:id="@+id/layout_cuentas_avemaria"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:text="Cuenta 3/10"
-            android:textColor="@android:color/darker_gray"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_progreso_rosario" />
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:gravity="end">
+        </LinearLayout>
 
     </LinearLayout>
-
-    <Button
-        android:id="@+id/button_siguiente_oracion"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="32dp"
-        android:text="Siguiente Oración"
-        android:textSize="18sp"
-        android:backgroundTint="@color/azuloscuro"
-        android:textColor="@android:color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
+    <!--
     <LinearLayout
         android:id="@+id/layout_audio_controls"
         android:layout_width="0dp"
@@ -134,5 +122,20 @@
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="Avanzar" />
     </LinearLayout>
+-->
+    <Button
+        android:id="@+id/button_siguiente_oracion"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="32dp"
+        android:text="Siguiente Oración"
+        android:textSize="18sp"
+        android:backgroundTint="@color/azuloscuro"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
