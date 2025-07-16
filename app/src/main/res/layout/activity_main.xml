@@ -1,141 +1,123 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/blancopuro"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@color/background_light"
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/text_misterios"
-        android:layout_width="0dp"
+        android:id="@+id/textView_date"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/azuloscuro"
-        android:padding="16dp"
-        android:textColor="@android:color/white"
-        android:textSize="24sp"
+        android:layout_gravity="center_horizontal"
+        android:text="Fecha"
+        android:textSize="20sp"
         android:textStyle="bold"
-        android:gravity="center"
-        android:text="Misterios Gozosos"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:textColor="@color/text_primary"
+        android:layout_marginBottom="24dp"
+        tools:text="Fecha"/>
 
-    <ImageView
-        android:id="@+id/image_misterio"
-        android:layout_width="0dp"
-        android:layout_height="320dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/gozosos1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_misterios"  /> <TextView
-        android:id="@+id/text_nombre_misterio"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="#80000000"
-        android:padding="16dp"
-        android:textColor="@android:color/white"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:text="1º Misterio: La Anunciación"
-        app:layout_constraintBottom_toBottomOf="@+id/image_misterio"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/divider_color"
+        android:layout_marginBottom="24dp"/>
 
     <TextView
-        android:id="@+id/text_oracion_actual"
-        android:layout_width="0dp"
+        android:id="@+id/textView_santo_title"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        android:text="Dios te salve, María..."
-        android:textColor="@android:color/black"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/image_misterio" />
+        android:text="Santo del Día:"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@color/text_secondary"
+        android:layout_marginBottom="8dp"/>
 
-
-    <LinearLayout
-        android:id="@+id/layout_progreso_rosario"
+    <TextView
+        android:id="@+id/textView_santo_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:textAlignment="center"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_oracion_actual">
+        android:text="Nuestra Señora del Carmen"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:textColor="@color/text_primary"
+        android:layout_marginBottom="8dp"
+        tools:text="Nuestra Señora del Carmen"/>
 
-
-        <LinearLayout
-            android:id="@+id/layout_cuentas_avemaria"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="horizontal"
-            android:gravity="end">
-        </LinearLayout>
-
-    </LinearLayout>
-    <!--
-    <LinearLayout
-        android:id="@+id/layout_audio_controls"
-        android:layout_width="0dp"
+    <TextView
+        android:id="@+id/textView_santo_description"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
+        android:text="Fundadora de las Misioneras Concepcionistas de la Enseñanza."
+        android:textSize="16sp"
+        android:textColor="@color/text_secondary"
         android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/button_siguiente_oracion"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        tools:text="Fundadora de las Misioneras Concepcionistas de la Enseñanza."/>
 
-        <ImageButton
-            android:id="@+id/btn_rewind"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:src="@android:drawable/ic_media_rew"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="Rebobinar" />
-
-        <ImageButton
-            android:id="@+id/btn_play_pause"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:src="@android:drawable/ic_media_play"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="Reproducir/Pausar" />
-
-        <ImageButton
-            android:id="@+id/btn_forward"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:src="@android:drawable/ic_media_ff"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="Avanzar" />
-    </LinearLayout>
--->
     <Button
-        android:id="@+id/button_siguiente_oracion"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="32dp"
-        android:text="Siguiente Oración"
-        android:textSize="18sp"
-        android:backgroundTint="@color/azuloscuro"
-        android:textColor="@android:color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:id="@+id/button_ver_mas_santo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ver más sobre el Santo"
+        android:paddingStart="24dp"
+        android:paddingEnd="24dp"
+        android:layout_marginBottom="24dp"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:textColor="@color/accent_color"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/divider_color"
+        android:layout_marginBottom="24dp"/>
+
+    <TextView
+        android:id="@+id/textView_novenas_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tus Novenas:"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@color/text_secondary"
+        android:layout_marginBottom="8dp"/>
+
+    <TextView
+        android:id="@+id/textView_novenas_status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="¡Hoy finaliza la Novena a la Virgen del Carmen!"
+        android:textSize="16sp"
+        android:textColor="@color/text_primary"
+        android:layout_marginBottom="16dp"
+        tools:text="¡Hoy finaliza la Novena a la Virgen del Carmen!"/>
+
+    <Button
+        android:id="@+id/button_explorar_novenas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Explorar Novenas"
+        android:paddingStart="24dp"
+        android:paddingEnd="24dp"
+        android:layout_marginBottom="32dp"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:textColor="@color/accent_color"/>
+
+    <Button
+        android:id="@+id/button_rezar_rosario"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Rezar el Rosario del Día"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
+        android:backgroundTint="@color/primary_button_color"
+        android:textColor="@android:color/white"
+        app:cornerRadius="8dp" />
+
+</LinearLayout>

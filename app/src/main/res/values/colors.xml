@@ -6,4 +6,12 @@
     <color name="azuloscuro">#4682B4</color> <!-- Para un toque de profundidad y serenidad. -->
     <color name="blancopuro">#FFFFFF</color> <!-- Para máxima claridad y legibilidad del texto. -->
     <color name="negrosuave">#333333</color> <!-- Para un contraste suave y elegante. -->
+
+    <color name="background_light">@color/blancopuro</color>
+    <color name="text_primary">@color/negrosuave</color>
+    <color name="text_secondary">@color/azuloscuro</color>
+    <color name="divider_color">@color/azulceleste</color>
+    <color name="accent_color">@color/azulceleste</color>
+    <color name="primary_button_color">@color/azuloscuro</color>
+
 </resources>
