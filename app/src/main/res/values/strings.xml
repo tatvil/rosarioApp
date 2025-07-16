@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Rosario del Faro</string>
+    <string name="siguiente_oracion">Siguiente Oración</string>
+    <string name="rosario_de_hoy">Rosario de hoy</string>
+    <string name="novenas">Novenas</string>
 </resources>

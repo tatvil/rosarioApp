@@ -14,6 +14,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.time.LocalDate;
 import java.time.DayOfWeek;
+import android.media.MediaPlayer;
 
 public class RosarioActivity extends AppCompatActivity {
 
@@ -35,6 +36,11 @@ public class RosarioActivity extends AppCompatActivity {
     private int etapaRosario = 0;
     // oracionEnEtapaIndex: Índice de la oración dentro de la etapa actual
     private int oracionEnEtapaIndex = 0;
+
+    // --- Variables para el control de audio ---
+    private MediaPlayer mediaPlayer;
+    private boolean isPlaying = false; // Estado del reproductor
+    private int currentAudioResId = 0; // ID del recurso de audio actual
 
     // --- Secuencias de Oraciones Estáticas ---
     private static final List<String> INTRO_ORACIONES = Arrays.asList(
@@ -65,7 +71,19 @@ public class RosarioActivity extends AppCompatActivity {
             "Oración final: Ruega por nosotros Santa Madre de Dios, \n para que seamos dignos de alcanzar las promesas de nuestro Señor Jesucristo."
     );
 
-    @Override
+    // --- Mapeo de oraciones a sus IDs de recursos de audio ---
+    // Esto es CRÍTICO para que el código sepa qué audio reproducir para cada oración.
+    // DEBES AÑADIR TODOS LOS AUDIOS AQUÍ.
+    private static final java.util.Map<String, Integer> ORATION_AUDIO_MAP = new java.util.HashMap<String, Integer>() {{
+        put("En el nombre del Padre, \n del Hijo \n y del Espíritu Santo. \n Amén.", R.raw.enelnombredelpadre);
+        put("Padrenuestro \n (por las intenciones del Papa)", R.raw.padrenuestro); // También para el Padrenuestro de las décadas
+        put("Padrenuestro, que estas en el cielo, santificado sea tu nombre. \n Venga tu reino. \n Hágase tu voluntad, así en la tierra como en el cielo.", R.raw.padrenuestro);
+        put("Ave María", R.raw.avemaria);
+        put("Nuestra señora del Rosario, \n ruega por nosotros.", R.raw.nuestrasenoradelrosario);
+
+    }};
+
+        @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rosario);
@@ -77,12 +95,30 @@ public class RosarioActivity extends AppCompatActivity {
       //  textProgresoRosario = findViewById(R.id.text_progreso_rosario);
         layoutCuentasAveMaria = findViewById(R.id.layout_cuentas_avemaria); // ¡Inicializar el nuevo LinearLayout!
         buttonSiguienteOracion = findViewById(R.id.button_siguiente_oracion);
-        // btnPlayPause = findViewById(R.id.btn_play_pause); // Descomentar si tienes este botón
+        btnPlayPause = findViewById(R.id.btn_play_pause); // Descomentar si tienes este botón
 
         // 2. Inicialización de datos del rosario
         inicializarMisteriosDelDia();
 
         // 3. Manejo del botón "Siguiente Oración"
+            buttonSiguienteOracion.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // Antes de avanzar, detener el audio actual si está reproduciéndose
+                    stopAudio();
+                    avanzarRosario();
+                }
+            });
+
+            // 4. Manejo del botón "Play/Pause"
+            btnPlayPause.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    togglePlayPause();
+                }
+            });
+
+        // 5. Manejo del botón "Siguiente Oración"
         buttonSiguienteOracion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -90,7 +126,7 @@ public class RosarioActivity extends AppCompatActivity {
             }
         });
 
-        // 4. Iniciar el rosario en el primer estado
+        // 6. Iniciar el rosario en el primer estado
         actualizarInterfazRosario();
     }
 
@@ -339,5 +375,126 @@ public class RosarioActivity extends AppCompatActivity {
         // if (textCuentaRosario != null) {
         //     textCuentaRosario.setText(cuentaRosarioText);
         // }
+    }
+
+    /**
+     * Libera el MediaPlayer cuando la actividad es destruida para evitar fugas de memoria.
+     */
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mediaPlayer != null) {
+            mediaPlayer.release();
+            mediaPlayer = null;
+        }
+    }
+
+    /**
+     * Reproduce un audio dado su ID de recurso.
+     * Detiene el audio actual si ya se está reproduciendo.
+     * @param audioResId El ID del recurso de audio (ej. R.raw.nombre_del_audio)
+     */
+    private void playAudio(int audioResId) {
+        // Si ya hay un audio reproduciéndose o el mediaPlayer está inicializado, liberarlo
+        if (mediaPlayer != null) {
+            mediaPlayer.release();
+            mediaPlayer = null;
+        }
+
+        // Crear un nuevo MediaPlayer con el nuevo audio
+        mediaPlayer = MediaPlayer.create(this, audioResId);
+        if (mediaPlayer != null) {
+            mediaPlayer.start();
+            isPlaying = true;
+            btnPlayPause.setImageResource(android.R.drawable.ic_media_pause); // Cambiar icono a pausa
+            currentAudioResId = audioResId; // Guarda el ID del audio que se está reproduciendo
+
+            // Configurar un listener para cuando el audio termine
+            mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mp) {
+                    isPlaying = false;
+                    btnPlayPause.setImageResource(android.R.drawable.ic_media_play); // Cambiar icono a play
+                    // Opcional: Avanzar a la siguiente oración automáticamente
+                    // avanzarRosario();
+                }
+            });
+        } else {
+            Log.e("AudioPlayer", "No se pudo crear MediaPlayer para el recurso: " + getResources().getResourceEntryName(audioResId));
+            isPlaying = false;
+            btnPlayPause.setImageResource(android.R.drawable.ic_media_play);
+        }
+    }
+
+    /**
+     * Detiene la reproducción de audio y libera el MediaPlayer.
+     */
+    private void stopAudio() {
+        if (mediaPlayer != null) {
+            mediaPlayer.stop();
+            mediaPlayer.release();
+            mediaPlayer = null;
+            isPlaying = false;
+            currentAudioResId = 0; // Resetear el ID del audio actual
+            btnPlayPause.setImageResource(android.R.drawable.ic_media_play); // Cambiar icono a play
+        }
+    }
+
+    /**
+     * Pausa la reproducción de audio.
+     */
+    private void pauseAudio() {
+        if (mediaPlayer != null && mediaPlayer.isPlaying()) {
+            mediaPlayer.pause();
+            isPlaying = false;
+            btnPlayPause.setImageResource(android.R.drawable.ic_media_play); // Cambiar icono a play
+        }
+    }
+
+    /**
+     * Reanuda la reproducción de audio si estaba pausada.
+     */
+    private void resumeAudio() {
+        if (mediaPlayer != null && !mediaPlayer.isPlaying()) {
+            mediaPlayer.start();
+            isPlaying = true;
+            btnPlayPause.setImageResource(android.R.drawable.ic_media_pause); // Cambiar icono a pausa
+        }
+    }
+
+    /**
+     * Alterna entre reproducir y pausar el audio.
+     */
+    private void togglePlayPause() {
+        if (isPlaying) {
+            pauseAudio();
+        } else {
+            if (mediaPlayer == null || currentAudioResId == 0) {
+                // Si no hay audio cargado, intenta reproducir el de la oración actual
+                triggerAudioForCurrentOration();
+            } else {
+                // Si hay audio y estaba pausado, reanúdalo
+                resumeAudio();
+            }
+        }
+    }
+
+    /**
+     * Intenta reproducir el audio de la oración actual.
+     * Se llama cuando la oración de texto cambia.
+     */
+    private void triggerAudioForCurrentOration() {
+        String currentOrationText = textOracionActual.getText().toString();
+        Integer audioResId = ORATION_AUDIO_MAP.get(currentOrationText);
+
+        if (audioResId != null) {
+            // Solo reproducir si es un audio diferente o si no se está reproduciendo
+            if (currentAudioResId != audioResId || !isPlaying) {
+                playAudio(audioResId);
+            }
+        } else {
+            Log.w("AudioPlayer", "No se encontró audio para la oración: " + currentOrationText);
+            stopAudio(); // Detener cualquier audio previo si no hay uno nuevo
+        }
     }
 }
