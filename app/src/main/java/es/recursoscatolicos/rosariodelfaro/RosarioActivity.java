@@ -42,6 +42,11 @@ public class RosarioActivity extends AppCompatActivity {
     private boolean isPlaying = false; // Estado del reproductor
     private int currentAudioResId = 0; // ID del recurso de audio actual
 
+    // --- Variables para el control de audio ---
+    private MediaPlayer mediaPlayer;
+    private boolean isPlaying = false; // Estado del reproductor
+    private int currentAudioResId = 0; // ID del recurso de audio actual
+
     // --- Secuencias de Oraciones Estáticas ---
     private static final List<String> INTRO_ORACIONES = Arrays.asList(
             "En el nombre del Padre, \n del Hijo \n y del Espíritu Santo. \n Amén.",
