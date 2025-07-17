@@ -37,6 +37,11 @@ public class RosarioActivity extends AppCompatActivity {
     // oracionEnEtapaIndex: Índice de la oración dentro de la etapa actual
     private int oracionEnEtapaIndex = 0;
 
+    // --- Variables para el control de audio ---
+    private MediaPlayer mediaPlayer;
+    private boolean isPlaying = false; // Estado del reproductor
+    private int currentAudioResId = 0; // ID del recurso de audio actual
+
     // --- Secuencias de Oraciones Estáticas ---
     private static final List<String> INTRO_ORACIONES = Arrays.asList(
             "En el nombre del Padre, \n del Hijo \n y del Espíritu Santo. \n Amén.",
@@ -66,15 +71,19 @@ public class RosarioActivity extends AppCompatActivity {
             "Oración final: Ruega por nosotros Santa Madre de Dios, \n para que seamos dignos de alcanzar las promesas de nuestro Señor Jesucristo."
     );
 
-    private ImageButton btnPlayPause; // Asegúrate de que este ID esté en tu XML
+    // --- Mapeo de oraciones a sus IDs de recursos de audio ---
+    // Esto es CRÍTICO para que el código sepa qué audio reproducir para cada oración.
+    // DEBES AÑADIR TODOS LOS AUDIOS AQUÍ.
+    private static final java.util.Map<String, Integer> ORATION_AUDIO_MAP = new java.util.HashMap<String, Integer>() {{
+        put("En el nombre del Padre, \n del Hijo \n y del Espíritu Santo. \n Amén.", R.raw.enelnombredelpadre);
+        put("Padrenuestro \n (por las intenciones del Papa)", R.raw.padrenuestro); // También para el Padrenuestro de las décadas
+        put("Padrenuestro, que estas en el cielo, santificado sea tu nombre. \n Venga tu reino. \n Hágase tu voluntad, así en la tierra como en el cielo.", R.raw.padrenuestro);
+        put("Ave María", R.raw.avemaria);
+        put("Nuestra señora del Rosario, \n ruega por nosotros.", R.raw.nuestrasenoradelrosario);
 
-    // --- Variables para el control de audio ---
-    private MediaPlayer mediaPlayer;
-    private boolean isPlaying = false; // Estado del reproductor
-    private int currentAudioResId = 0; // ID del recurso de audio actual
+    }};
 
-
-    @Override
+        @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rosario);
@@ -92,6 +101,24 @@ public class RosarioActivity extends AppCompatActivity {
         inicializarMisteriosDelDia();
 
         // 3. Manejo del botón "Siguiente Oración"
+            buttonSiguienteOracion.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // Antes de avanzar, detener el audio actual si está reproduciéndose
+                    stopAudio();
+                    avanzarRosario();
+                }
+            });
+
+            // 4. Manejo del botón "Play/Pause"
+            btnPlayPause.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    togglePlayPause();
+                }
+            });
+
+        // 5. Manejo del botón "Siguiente Oración"
         buttonSiguienteOracion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -99,7 +126,7 @@ public class RosarioActivity extends AppCompatActivity {
             }
         });
 
-        // 4. Iniciar el rosario en el primer estado
+        // 6. Iniciar el rosario en el primer estado
         actualizarInterfazRosario();
     }
 

@@ -80,7 +80,7 @@
         android:id="@+id/textView_novenas_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Tus Novenas:"
+        android:text="Novenas:"
         android:textSize="18sp"
         android:textStyle="bold"
         android:textColor="@color/text_secondary"
@@ -90,7 +90,7 @@
         android:id="@+id/textView_novenas_status"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="¡Hoy finaliza la Novena a la Virgen del Carmen!"
+        android:text="Virgen del Carmen"
         android:textSize="16sp"
         android:textColor="@color/text_primary"
         android:layout_marginBottom="16dp"
@@ -100,7 +100,7 @@
         android:id="@+id/button_explorar_novenas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Explorar Novenas"
+        android:text="@string/novenas"
         android:paddingStart="24dp"
         android:paddingEnd="24dp"
         android:layout_marginBottom="32dp"
@@ -110,14 +110,17 @@
     <Button
         android:id="@+id/button_rezar_rosario"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Rezar el Rosario del Día"
+        android:layout_height="60dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="32dp"
+        android:text="@string/rosario_de_hoy"
         android:textSize="18sp"
-        android:textStyle="bold"
-        android:paddingTop="16dp"
-        android:paddingBottom="16dp"
         android:backgroundTint="@color/primary_button_color"
         android:textColor="@android:color/white"
-        app:cornerRadius="8dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 
 </LinearLayout>

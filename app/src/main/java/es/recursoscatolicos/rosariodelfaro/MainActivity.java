@@ -133,12 +133,8 @@ public class MainActivity extends AppCompatActivity {
         buttonRezarRosario.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Aquí iniciarías la Activity para rezar el Rosario
-                // Esta sería tu Activity principal para el MVP del Rosario
-                // Por ejemplo:
-                // Intent intent = new Intent(MainActivity.this, RosarioActivity.class);
-                // startActivity(intent);
-                // Toast.makeText(MainActivity.this, "Iniciando el Rosario del Día...", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MainActivity.this, RosarioActivity.class);
+                startActivity(intent);
             }
         });
     }
