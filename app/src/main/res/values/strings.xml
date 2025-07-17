@@ -3,4 +3,46 @@
     <string name="siguiente_oracion">Siguiente Oración</string>
     <string name="rosario_de_hoy">Rosario de hoy</string>
     <string name="novenas">Novenas</string>
+
+    <string name="intro_en_el_nombre">En el nombre del Padre, \n del Hijo \n y del Espíritu Santo. \n Amén.</string>
+    <string name="intro_padrenuestro_intencion_papa">Padrenuestro \n (por las intenciones del Papa)</string>
+    <string name="intro_ave_maria_1">Ave María (1/3)</string>
+    <string name="intro_ave_maria_2">Ave María (2/3)</string>
+    <string name="intro_ave_maria_3">Ave María (3/3)</string>
+    <string name="intro_gloria">Gloria al Padre, al hijo y al Espíritu Santo \n como era en el principio, ahora y siempre, por los siglos de los siglos. \n Amén.</string>
+
+    <string name="decada_padrenuestro_parte1">Padrenuestro, que estas en el cielo, santificado sea tu nombre. \n Venga tu reino. \n Hágase tu voluntad, así en la tierra como en el cielo.</string>
+    <string name="decada_padrenuestro_parte2">Danos hoy el pan nuestro de cada día. \n Perdona nuestras ofensas, así como nosotros perdonamos a los que nos ofenden. \n No nos dejes caer en la tentación y líbranos de mal.</string>
+    <string name="decada_ave_maria">Ave María</string>
+    <string name="decada_gloria">Gloria al Padre, al hijo y al Espíritu Santo \n como era en el principio, ahora y siempre, por los siglos de los siglos. \n Amén.</string>
+    <string name="decada_jaculatoria_ns_rosario">Nuestra señora del Rosario, \n ruega por nosotros.</string>
+    <string name="decada_jaculatoria_santo_rosario">Santo Rosario, \n ruega por nosotros.</string>
+
+    <string name="conclusion_salve_regina">Salve Regina</string>
+    <string name="conclusion_oracion_final">Oración final: Ruega por nosotros Santa Madre de Dios, \n para que seamos dignos de alcanzar las promesas de nuestro Señor Jesucristo.</string>
+
+    <string name="gozoso_1_meditacion">Lucas 1,26-38: El ángel Gabriel fue enviado a María para anunciarle que concebiría a Jesús por obra del Espíritu Santo. María aceptó: «He aquí la esclava del Señor; hágase en mí según tu palabra.»</string>
+    <string name="gozoso_2_meditacion">Lucas 1,39-56: María visitó a su prima Isabel, quien, llena del Espíritu Santo, la reconoció como la Madre de su Señor. María proclamó el Magníficat.</string>
+    <string name="gozoso_3_meditacion">Lucas 2,1-20: Jesús nació en Belén en un pesebre. Ángeles anunciaron a los pastores: «Hoy os ha nacido un Salvador, que es el Mesías, el Señor.»</string>
+    <string name="gozoso_4_meditacion">Lucas 2,22-40: María y José presentaron a Jesús en el Templo. Simeón profetizó sobre el Niño y María: «Una espada te traspasará el alma.»</string>
+    <string name="gozoso_5_meditacion">Lucas 2,41-52: Jesús, de doce años, se quedó en el Templo, conversando con los maestros. María y José lo encontraron, y Él les dijo: «¿No sabíais que debía estar en la casa de mi Padre?»</string>
+
+    <string name="doloroso_1_meditacion">Mateo 26,36-46: Jesús oró en Getsemaní, angustiado hasta la muerte, y aceptó la voluntad del Padre: «No se haga mi voluntad, sino la tuya.»</string>
+    <string name="doloroso_2_meditacion">Juan 19,1-3: Pilato hizo flagelar a Jesús. Los soldados lo azotaron cruelmente y se burlaron de Él.</string>
+    <string name="doloroso_3_meditacion">Marcos 15,16-20: Los soldados vistieron a Jesús de púrpura, le tejieron una corona de espinas y se la pusieron, burlándose de Él.</string>
+    <string name="doloroso_4_meditacion">Juan 19,17: Jesús cargó su propia cruz y salió hacia el lugar llamado la Calavera, en su camino al Calvario.</string>
+    <string name="doloroso_5_meditacion">Juan 19,25-30: Jesús fue crucificado. Desde la cruz, entregó a su madre a Juan. Después de decir «Todo está cumplido», inclinó la cabeza y entregó el espíritu.</string>
+
+    <string name="glorioso_1_meditacion">Juan 20,1-10: Jesús resucitó al tercer día, venciendo a la muerte. Los discípulos encontraron el sepulcro vacío y creyeron.</string>
+    <string name="glorioso_2_meditacion">Hechos 1,6-11: Jesús ascendió al cielo ante sus discípulos. Dos ángeles anunciaron: «Este Jesús volverá del mismo modo que lo habéis visto ir al cielo.»</string>
+    <string name="glorioso_3_meditacion">Hechos 2,1-13: El Espíritu Santo descendió sobre los apóstoles y María en Pentecostés, capacitándolos para proclamar el Evangelio en todas las lenguas.</string>
+    <string name="glorioso_4_meditacion">Apocalipsis 12,14: María fue llevada al cielo en cuerpo y alma. Es figura de la Iglesia que un día también participará plenamente de la gloria de Cristo.</string>
+    <string name="glorioso_5_meditacion">Apocalipsis 12,1: María, asunta al cielo, fue coronada como Reina del universo, con una corona de doce estrellas, el sol y la luna bajo sus pies.</string>
+
+    <string name="luminoso_1_meditacion">Mateo 3,13-17: Jesús fue bautizado por Juan en el Jordán. Se abrió el cielo y el Espíritu Santo descendió sobre Él, y se oyó la voz del Padre: «Este es mi Hijo amado.»</string>
+    <string name="luminoso_2_meditacion">Juan 2,1-11: En las bodas de Caná, Jesús convirtió el agua en vino a petición de María, manifestando su gloria y creyendo en Él sus discípulos.</string>
+    <string name="luminoso_3_meditacion">Marcos 1,14-15: Jesús proclamó el Reino de Dios: «Convertíos y creed en el Evangelio.» Invitó a la penitencia y al seguimiento de su Palabra.</string>
+    <string name="luminoso_4_meditacion">Lucas 9,28-36: Jesús se transfiguró en el monte, revelando su gloria a Pedro, Santiago y Juan. Moisés y Elías aparecieron, y el Padre dijo: «Este es mi Hijo, el Elegido; escuchadle.»</string>
+    <string name="luminoso_5_meditacion">Lucas 22,19-20: Jesús instituyó la Eucaristía en la Última Cena, dando su Cuerpo y Sangre como alimento y memorial de su sacrificio por nosotros.</string>
+
 </resources>

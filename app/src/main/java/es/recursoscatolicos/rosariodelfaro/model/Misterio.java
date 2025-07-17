@@ -1,4 +1,4 @@
-package es.recursoscatolicos.rosariodelfaro;
+package es.recursoscatolicos.rosariodelfaro.model;
 
 public class Misterio {
     private String nombre;
