@@ -14,6 +14,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.time.LocalDate;
 import java.time.DayOfWeek;
+import android.media.MediaPlayer; // ¡Importar MediaPlayer!
 
 public class RosarioActivity extends AppCompatActivity {
 
@@ -64,6 +65,14 @@ public class RosarioActivity extends AppCompatActivity {
             "Salve Regina",
             "Oración final: Ruega por nosotros Santa Madre de Dios, \n para que seamos dignos de alcanzar las promesas de nuestro Señor Jesucristo."
     );
+
+    private ImageButton btnPlayPause; // Asegúrate de que este ID esté en tu XML
+
+    // --- Variables para el control de audio ---
+    private MediaPlayer mediaPlayer;
+    private boolean isPlaying = false; // Estado del reproductor
+    private int currentAudioResId = 0; // ID del recurso de audio actual
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
