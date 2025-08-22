@@ -1,4 +1,3 @@
-// app/src/main/java/es/recursoscatolicos/rosariodelfaro/data/RosarioDataProvider.java
 package es.recursoscatolicos.rosariodelfaro.data;
 
 import android.content.Context; // ¡Importar Context!
@@ -47,8 +46,7 @@ public class RosarioDataProvider {
                 new Oracion(context.getString(R.string.decada_ave_maria), R.raw.avemaria, true, "AVEMARIA"),
                 new Oracion(context.getString(R.string.decada_ave_maria), R.raw.avemaria, true, "AVEMARIA"),
                 new Oracion(context.getString(R.string.decada_gloria), R.raw.gloria, false, "DECADA_GLORIA"),
-                new Oracion(context.getString(R.string.decada_jaculatoria_ns_rosario), R.raw.nuestrasenoradelrosario, false, "JACULATORIA_NS_ROSARIO"),
-                new Oracion(context.getString(R.string.decada_jaculatoria_santo_rosario), R.raw.santorosario, false, "JACULATORIA_SANTO_ROSARIO")
+                new Oracion(context.getString(R.string.decada_jaculatoria_ns_rosario), R.raw.nuestrasenoradelrosario, false, "JACULATORIA_NS_ROSARIO")
         );
     }
 
@@ -62,13 +60,14 @@ public class RosarioDataProvider {
     private List<Misterio> getGozososInternal() {
         return Arrays.asList(
                 new Misterio("1. La Anunciación", R.drawable.gozosos1, new Oracion(context.getString(R.string.gozoso_1_meditacion), R.raw.gozoso_1_meditacion, false, "MEDITACION")),
-                new Misterio("2. La Visitación", R.drawable.gozosos2, new Oracion(context.getString(R.string.gozoso_2_meditacion), R.raw.gozoso_2_meditacion, false, "MEDITACION")),
-                new Misterio("3. El Nacimiento de Jesús", R.drawable.gozosos3, new Oracion(context.getString(R.string.gozoso_3_meditacion), R.raw.gozoso_3_meditacion, false, "MEDITACION")),
-                new Misterio("4. La Presentación de Jesús en el Templo", R.drawable.gozosos4, new Oracion(context.getString(R.string.gozoso_4_meditacion), R.raw.gozoso_4_meditacion, false, "MEDITACION")),
-                new Misterio("5. El Niño Jesús en el Templo", R.drawable.gozosos5, new Oracion(context.getString(R.string.gozoso_5_meditacion), R.raw.gozoso_5_meditacion, false, "MEDITACION"))
+                new Misterio("2. La Visitación", R.drawable.gozosos2, new Oracion(context.getString(R.string.gozoso_2_meditacion), R.raw.gozoso_2_meditacion, false, "MEDITACION"))
+    //            new Misterio("3. El Nacimiento de Jesús", R.drawable.gozosos3, new Oracion(context.getString(R.string.gozoso_3_meditacion), R.raw.gozoso_3_meditacion, false, "MEDITACION")),
+    //            new Misterio("4. La Presentación de Jesús en el Templo", R.drawable.gozosos4, new Oracion(context.getString(R.string.gozoso_4_meditacion), R.raw.gozoso_4_meditacion, false, "MEDITACION")),
+    //            new Misterio("5. El Niño Jesús en el Templo", R.drawable.gozosos5, new Oracion(context.getString(R.string.gozoso_5_meditacion), R.raw.gozoso_5_meditacion, false, "MEDITACION"))
         );
     }
-    // ... (Repite para Dolorosos, Gloriosos, Luminosos)
+
+    /*
     private List<Misterio> getDolorososInternal() {
         return Arrays.asList(
                 new Misterio("1. La Oración en el Huerto", R.drawable.dolorosos1, new Oracion(context.getString(R.string.doloroso_1_meditacion), R.raw.doloroso_1_meditacion, false, "MEDITACION")),
@@ -98,6 +97,7 @@ public class RosarioDataProvider {
                 new Misterio("5. La Institución de la Eucaristía", R.drawable.luminosos5, new Oracion(context.getString(R.string.luminoso_5_meditacion), R.raw.luminoso_5_meditacion, false, "MEDITACION"))
         );
     }
+       */
 
     // Métodos públicos que usan los métodos internos
     public List<Misterio> getMisteriosDelDia() {
@@ -106,12 +106,12 @@ public class RosarioDataProvider {
 
         if (diaActual == DayOfWeek.MONDAY || diaActual == DayOfWeek.SATURDAY) {
             misteriosDelDia.addAll(getGozososInternal());
-        } else if (diaActual == DayOfWeek.TUESDAY || diaActual == DayOfWeek.FRIDAY) {
-            misteriosDelDia.addAll(getDolorososInternal());
-        } else if (diaActual == DayOfWeek.WEDNESDAY || diaActual == DayOfWeek.SUNDAY) {
-            misteriosDelDia.addAll(getGloriososInternal());
-        } else if (diaActual == DayOfWeek.THURSDAY) {
-            misteriosDelDia.addAll(getLuminososInternal());
+//        } else if (diaActual == DayOfWeek.TUESDAY || diaActual == DayOfWeek.FRIDAY) {
+//            misteriosDelDia.addAll(getDolorososInternal());
+//        } else if (diaActual == DayOfWeek.WEDNESDAY || diaActual == DayOfWeek.SUNDAY) {
+//            misteriosDelDia.addAll(getGloriososInternal());
+//        } else if (diaActual == DayOfWeek.THURSDAY) {
+//            misteriosDelDia.addAll(getLuminososInternal());
         } else {
             // Manejo de error o un conjunto de misterios por defecto
         }

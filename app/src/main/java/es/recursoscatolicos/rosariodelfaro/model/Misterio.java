@@ -3,10 +3,10 @@ package es.recursoscatolicos.rosariodelfaro.model;
 public class Misterio {
     private String nombre;
     private int imagenResId;
-    private String meditation; // Nuevo campo para la meditación
+    private Oracion meditation; // Nuevo campo para la meditación
 
     // Constructor actualizado para incluir la meditación
-    public Misterio(String nombre, int imagenResId, String meditation) {
+    public Misterio(String nombre, int imagenResId, Oracion meditation) {
         this.nombre = nombre;
         this.imagenResId = imagenResId;
         this.meditation = meditation;
@@ -21,7 +21,7 @@ public class Misterio {
     }
 
     // Nuevo método getter para la meditación
-    public String getMeditation() {
+    public Oracion getMeditation() {
         return meditation;
     }
 }

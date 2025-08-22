@@ -1,15 +1,17 @@
-// Nuevo archivo: app/src/main/java/es/recursoscatolicos/rosariodelfaro/logic/RosarioLogicManager.java
 package es.recursoscatolicos.rosariodelfaro.logic;
 
+import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.util.List;
 
 import es.recursoscatolicos.rosariodelfaro.data.RosarioDataProvider;
 import es.recursoscatolicos.rosariodelfaro.model.Misterio;
 import es.recursoscatolicos.rosariodelfaro.model.Oracion;
+import es.recursoscatolicos.rosariodelfaro.R; // Asegúrate de que esta importación sea correcta para acceder a R.drawable
 
 public class RosarioLogicManager {
 
-    private RosarioDataProvider dataProvider;
+    public RosarioDataProvider dataProvider;
     private List<Misterio> misteriosDelDia;
 
     // Variables de estado para el progreso del rosario
@@ -19,10 +21,13 @@ public class RosarioLogicManager {
     private int oracionEnEtapaIndex = 0;
 
     public static final int NUM_AVEMARIAS_DECADA = 10;
-    public static final int INDEX_PRIMER_AVEMARIA_TEMPLATE = 2; // Índice del primer Ave María en DECADA_BASICA_TEMPLATE
+    // Índice del primer Ave María en la plantilla de la década.
+    // Esto es útil para saber cuántas Ave Marías se han rezado.
+    public static final int INDEX_PRIMER_AVEMARIA_TEMPLATE = 2;
 
     public RosarioLogicManager(RosarioDataProvider dataProvider) {
         this.dataProvider = dataProvider;
+        // Obtenemos los misterios del día al inicializar la clase.
         this.misteriosDelDia = dataProvider.getMisteriosDelDia();
     }
 
@@ -32,55 +37,95 @@ public class RosarioLogicManager {
     public void resetRosario() {
         etapaRosario = 0;
         oracionEnEtapaIndex = 0;
-        // Si los misterios del día pueden cambiar (ej. si el usuario cambia el día),
-        // podrías volver a llamar a dataProvider.getMisteriosDelDia() aquí.
+        // Volvemos a obtener los misterios del día por si el día ha cambiado.
+        this.misteriosDelDia = dataProvider.getMisteriosDelDia();
     }
 
     /**
      * Avanza a la siguiente oración del Rosario.
+     *
      * @return El objeto Oracion actual, o null si el rosario ha terminado.
      */
     public Oracion getNextOracion() {
-        Oracion currentOracion = null;
+        // Incrementamos primero para ir a la siguiente oración.
+        // La lógica de avance de etapa se maneja al final del método.
+        oracionEnEtapaIndex++;
 
+        // La llamada a getCurrentOracion() está ahora aquí, ya que el índice
+        // se actualizó para apuntar a la siguiente oración.
+        Oracion currentOracion = getCurrentOracion();
+
+        // Si la oración actual es null, el rosario ha terminado.
+        if (currentOracion == null) {
+            return null;
+        }
+
+        // Se ha simplificado la lógica de avance de etapa para mayor claridad.
+        // Si el índice de la oración en la etapa ha excedido el tamaño de la lista de oraciones,
+        // avanzamos a la siguiente etapa y reiniciamos el índice de la oración.
         List<Oracion> currentStageOraciones;
         int totalOracionesInStage;
 
         if (etapaRosario == 0) { // Introducción
             currentStageOraciones = dataProvider.getIntroOraciones();
-            totalOracionesInStage = currentStageOraciones.size();
-            currentOracion = currentStageOraciones.get(oracionEnEtapaIndex);
         } else if (etapaRosario >= 1 && etapaRosario <= 5) { // Décadas
-            if (oracionEnEtapaIndex == 0) { // Meditación del misterio
-                Misterio misterioActual = misteriosDelDia.get(etapaRosario - 1);
-                currentOracion = misterioActual.getMeditationOracion(); // Asume que Misterio ahora devuelve un objeto Oracion para la meditación
-            } else {
-                currentStageOraciones = dataProvider.getDecadaTemplateOraciones();
-                // oracionEnEtapaIndex - 1 porque el índice 0 de la etapa es la meditación
-                // y el resto de DECADA_BASICA_TEMPLATE empieza en el índice 0 del template
-                currentOracion = currentStageOraciones.get(oracionEnEtapaIndex - 1);
-            }
-            totalOracionesInStage = 1 + dataProvider.getDecadaTemplateOraciones().size(); // +1 por la meditación
-
+            currentStageOraciones = dataProvider.getDecadaTemplateOraciones();
+            // La meditación se maneja dentro de la plantilla de la década
+            // al combinarla con el misterio y la plantilla de la década.
         } else if (etapaRosario == 6) { // Conclusión
             currentStageOraciones = dataProvider.getConclusionOraciones();
-            totalOracionesInStage = currentStageOraciones.size();
-            currentOracion = currentStageOraciones.get(oracionEnEtapaIndex);
         } else {
-            // Rosario completado o etapa inválida
-            return null; // Indica que el rosario ha terminado
+            return currentOracion; // Si ya hemos completado el rosario, no avanzamos más.
         }
 
-        oracionEnEtapaIndex++;
+        totalOracionesInStage = currentStageOraciones.size();
 
-        // Verificar si la etapa actual ha terminado
         if (oracionEnEtapaIndex >= totalOracionesInStage) {
             etapaRosario++;
-            oracionEnEtapaIndex = 0; // Reiniciar el índice para la próxima etapa
+            oracionEnEtapaIndex = 0; // Reiniciamos el índice para la próxima etapa
         }
 
         return currentOracion;
     }
+
+
+    /**
+     * Devuelve la oración actual basada en el estado actual (etapa y índice).
+     * Este método es nuevo y centraliza la lógica de obtener la oración.
+     *
+     * @return El objeto Oracion actual, o null si el rosario ha terminado o la etapa es inválida.
+     */
+    public Oracion getCurrentOracion() {
+        if (etapaRosario == 0) { // Introducción
+            List<Oracion> introOraciones = dataProvider.getIntroOraciones();
+            if (oracionEnEtapaIndex < introOraciones.size()) {
+                return introOraciones.get(oracionEnEtapaIndex);
+            }
+        } else if (etapaRosario >= 1 && etapaRosario <= 5) { // Décadas
+            // La meditación ya no se trata como una etapa separada.
+            // La lógica ahora toma la meditación del misterio actual
+            // y la combina con la plantilla de la década.
+            Misterio misterioActual = misteriosDelDia.get(etapaRosario - 1);
+            List<Oracion> decadaTemplate = dataProvider.getDecadaTemplateOraciones();
+
+            // Meditación es la primera "oración" de la década (índice 0)
+            if (oracionEnEtapaIndex == 0) {
+                return misterioActual.getMeditation();
+            }
+            // El resto de las oraciones vienen de la plantilla de la década.
+            // Hay que ajustar el índice porque la meditación ocupa el índice 0.
+            if (oracionEnEtapaIndex - 1 < decadaTemplate.size()) {
+                return decadaTemplate.get(oracionEnEtapaIndex - 1);
+            }
+        } else if (etapaRosario == 6) { // Conclusión
+            List<Oracion> conclusionOraciones = dataProvider.getConclusionOraciones();
+            if (oracionEnEtapaIndex < conclusionOraciones.size()) {
+                return conclusionOraciones.get(oracionEnEtapaIndex);
+            }
+        }
+        return null; // El rosario ha terminado o la etapa es inválida
+    }
+
 
     // Métodos getter para el estado actual
     public int getEtapaRosario() {
@@ -96,6 +141,9 @@ public class RosarioLogicManager {
     }
 
     public boolean isRosarioCompleted() {
+        // Ahora el rosario se considera completo cuando la etapa es mayor que 6
+        // y el índice de la oración en la etapa de conclusión ha terminado.
+        // La condición en getNextOracion() y getCurrentOracion() maneja el resto.
         return etapaRosario > 6;
     }
 
@@ -110,21 +158,19 @@ public class RosarioLogicManager {
         if (etapaRosario >= 1 && etapaRosario <= 5) {
             return misteriosDelDia.get(etapaRosario - 1).getImagenResId();
         }
-        return R.drawable.rosario_general; // Imagen por defecto
+        // Si no estamos en una década, devolvemos una imagen por defecto
+        return R.drawable.rosario_general;
     }
 
     public int getAveMariasRezadaCount() {
+        // Solo contamos las Ave Marías si estamos en una década y si la oración actual es un Ave María.
         if (etapaRosario >= 1 && etapaRosario <= 5) {
-            // Contar Ave Marías solo si la oración actual es un Ave María
-            Oracion currentOration = dataProvider.getDecadaTemplateOraciones().get(oracionEnEtapaIndex - 1);
-            if (currentOration.esAveMaria()) {
-                // El oracionEnEtapaIndex se incrementa al principio de getNextOracion
-                // Entonces, si oracionEnEtapaIndex es 3, significa que la oracion en índice 2 es la actual
-                // Si el primer Ave María está en el índice 2 de la plantilla, entonces:
-                // oracionEnEtapaIndex - INDEX_PRIMER_AVEMARIA_TEMPLATE
-                // Ejemplo: oracionEnEtapaIndex=3 (3a oracion de la década), INDEX_PRIMER_AVEMARIA_TEMPLATE=2
-                // Resultado: 3 - 2 = 1. Sería la primera Ave María.
-                return (oracionEnEtapaIndex - INDEX_PRIMER_AVEMARIA_TEMPLATE);
+            // Se asume que la plantilla de la década tiene el Ave María en los índices
+            // siguientes a la meditación y el Padre Nuestro.
+            // Si el índice de la oración actual es mayor que el índice del primer Ave María de la plantilla,
+            // podemos calcular cuántas se han rezado.
+            if (oracionEnEtapaIndex >= (1 + dataProvider.getDecadaTemplateOraciones().indexOf(dataProvider.getDecadaTemplateOraciones().get(INDEX_PRIMER_AVEMARIA_TEMPLATE)))) {
+                return oracionEnEtapaIndex - (1 + dataProvider.getDecadaTemplateOraciones().indexOf(dataProvider.getDecadaTemplateOraciones().get(INDEX_PRIMER_AVEMARIA_TEMPLATE)));
             }
         }
         return 0; // No estamos en una Ave María
@@ -144,4 +190,6 @@ public class RosarioLogicManager {
         }
         return "Misterios del Día";
     }
+
 }
+

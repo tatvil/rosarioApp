@@ -47,7 +47,7 @@ public class RosarioActivity extends AppCompatActivity {
         textMisteriosTitulo = findViewById(R.id.text_misterios); // Assuming you have this TextView
 
         // 2. Initialize Managers
-        RosarioDataProvider dataProvider = new RosarioDataProvider();
+        RosarioDataProvider dataProvider = new RosarioDataProvider(this);
         rosarioLogicManager = new RosarioLogicManager(dataProvider);
         rosarioAudioManager = new RosarioAudioManager(this);
 
