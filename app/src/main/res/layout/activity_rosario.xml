@@ -17,7 +17,7 @@
         android:textSize="24sp"
         android:textStyle="bold"
         android:gravity="center"
-        android:text="Misterios Gozosos"
+        android:text="@string/misterios_gozosos"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -40,7 +40,7 @@
         android:textSize="24sp"
         android:textStyle="bold"
         android:gravity="center"
-        android:text="1º Misterio: La Anunciación"
+        android:text="@string/misterio_default_nombre"
         app:layout_constraintBottom_toBottomOf="@+id/image_misterio"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -52,7 +52,7 @@
         android:layout_marginTop="24dp"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
-        android:text="Dios te salve, María..."
+        android:text="@string/oracion_default_texto"
         android:textColor="@android:color/black"
         android:textAlignment="center"
         android:textSize="20sp"

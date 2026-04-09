@@ -1,126 +1,170 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp"
     android:background="@color/background_light"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/textView_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="Fecha"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:textColor="@color/text_primary"
-        android:layout_marginBottom="24dp"
-        tools:text="Fecha"/>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/divider_color"
-        android:layout_marginBottom="24dp"/>
-
-    <TextView
-        android:id="@+id/textView_santo_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Santo del Día:"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:textColor="@color/text_secondary"
-        android:layout_marginBottom="8dp"/>
-
-    <TextView
-        android:id="@+id/textView_santo_name"
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Nuestra Señora del Carmen"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        android:textColor="@color/text_primary"
-        android:layout_marginBottom="8dp"
-        tools:text="Nuestra Señora del Carmen"/>
+        android:background="@color/azuloscuro">
 
-    <TextView
-        android:id="@+id/textView_santo_description"
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:title="@string/app_toolbar_title"
+            app:titleTextColor="@color/white" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Fundadora de las Misioneras Concepcionistas de la Enseñanza."
-        android:textSize="16sp"
-        android:textColor="@color/text_secondary"
-        android:layout_marginBottom="16dp"
-        tools:text="Fundadora de las Misioneras Concepcionistas de la Enseñanza."/>
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-    <Button
-        android:id="@+id/button_ver_mas_santo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Ver más sobre el Santo"
-        android:paddingStart="24dp"
-        android:paddingEnd="24dp"
-        android:layout_marginBottom="24dp"
-        style="@style/Widget.MaterialComponents.Button.TextButton"
-        android:textColor="@color/accent_color"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/divider_color"
-        android:layout_marginBottom="24dp"/>
+            <TextView
+                android:id="@+id/textView_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="24dp"
+                android:textColor="@color/text_primary"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                tools:text="Lunes, 22 de Mayo de 2024" />
 
-    <TextView
-        android:id="@+id/textView_novenas_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Novenas:"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:textColor="@color/text_secondary"
-        android:layout_marginBottom="8dp"/>
+            <!-- Card: Santo del Día -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="4dp"
+                app:strokeWidth="0dp">
 
-    <TextView
-        android:id="@+id/textView_novenas_status"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Virgen del Carmen"
-        android:textSize="16sp"
-        android:textColor="@color/text_primary"
-        android:layout_marginBottom="16dp"
-        tools:text="¡Hoy finaliza la Novena a la Virgen del Carmen!"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
 
-    <Button
-        android:id="@+id/button_explorar_novenas"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/novenas"
-        android:paddingStart="24dp"
-        android:paddingEnd="24dp"
-        android:layout_marginBottom="32dp"
-        style="@style/Widget.MaterialComponents.Button.TextButton"
-        android:textColor="@color/accent_color"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/santo_del_dia"
+                        android:textColor="@color/azuloscuro"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:textAllCaps="true" />
 
-    <Button
-        android:id="@+id/button_rezar_rosario"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="32dp"
-        android:text="@string/rosario_de_hoy"
-        android:textSize="18sp"
-        android:backgroundTint="@color/primary_button_color"
-        android:textColor="@android:color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+                    <TextView
+                        android:id="@+id/textView_santo_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:textColor="@color/text_primary"
+                        android:textSize="22sp"
+                        android:textStyle="bold"
+                        tools:text="Nuestra Señora del Carmen" />
 
+                    <TextView
+                        android:id="@+id/textView_santo_description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="16sp"
+                        tools:text="Protectora de los marineros y Patrona de muchas ciudades." />
 
-</LinearLayout>
+                    <Button
+                        android:id="@+id/button_ver_mas_santo"
+                        style="@style/Widget.MaterialComponents.Button.TextButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/ver_mas"
+                        android:textColor="@color/azuloscuro" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Card: Novenas -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="4dp"
+                app:strokeWidth="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/novenas"
+                        android:textColor="@color/azuloscuro"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:textAllCaps="true" />
+
+                    <TextView
+                        android:id="@+id/textView_novenas_status"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:textColor="@color/text_primary"
+                        android:textSize="16sp"
+                        tools:text="¡Hoy finaliza la Novena a la Virgen del Carmen!" />
+
+                    <Button
+                        android:id="@+id/button_explorar_novenas"
+                        style="@style/Widget.MaterialComponents.Button.TextButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/explorar_novenas"
+                        android:textColor="@color/azuloscuro" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Large Button: Rezar Rosario -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_rezar_rosario"
+                android:layout_width="match_parent"
+                android:layout_height="72dp"
+                android:layout_marginBottom="32dp"
+                android:text="@string/rezar_el_santo_rosario"
+                android:textSize="18sp"
+                app:cornerRadius="16dp"
+                app:icon="@android:drawable/ic_media_play"
+                app:iconGravity="textStart"
+                app:iconPadding="12dp"
+                android:backgroundTint="@color/azuloscuro"
+                android:textColor="@color/white" />
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

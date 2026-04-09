@@ -15,7 +15,6 @@ import es.recursoscatolicos.rosariodelfaro.audio.RosarioAudioManager;
 import es.recursoscatolicos.rosariodelfaro.data.RosarioDataProvider;
 import es.recursoscatolicos.rosariodelfaro.logic.RosarioLogicManager;
 import es.recursoscatolicos.rosariodelfaro.model.Oracion;
-import es.recursoscatolicos.rosariodelfaro.model.Misterio;
 
 public class RosarioActivity extends AppCompatActivity {
 
@@ -43,8 +42,8 @@ public class RosarioActivity extends AppCompatActivity {
         textOracionActual = findViewById(R.id.text_oracion_actual);
         layoutCuentasAveMaria = findViewById(R.id.layout_cuentas_avemaria);
         buttonSiguienteOracion = findViewById(R.id.button_siguiente_oracion);
-        btnPlayPause = findViewById(R.id.btn_play_pause); // Ensure this ID exists in your XML
-        textMisteriosTitulo = findViewById(R.id.text_misterios); // Assuming you have this TextView
+        btnPlayPause = findViewById(R.id.btn_play_pause);
+        textMisteriosTitulo = findViewById(R.id.text_misterios);
 
         // 2. Initialize Managers
         RosarioDataProvider dataProvider = new RosarioDataProvider(this);
@@ -52,32 +51,21 @@ public class RosarioActivity extends AppCompatActivity {
         rosarioAudioManager = new RosarioAudioManager(this);
 
         // Set listener for audio completion (optional, for auto-advance)
-        rosarioAudioManager.setAudioCompletionListener(new RosarioAudioManager.AudioCompletionListener() {
-            @Override
-            public void onAudioCompleted() {
-                // If you want the rosary to advance automatically after each audio:
-                // avanzarRosario();
-                // Or simply reset the play/pause button state
-                btnPlayPause.setImageResource(android.R.drawable.ic_media_play);
-            }
+        rosarioAudioManager.setAudioCompletionListener(() -> {
+            // If you want the rosary to advance automatically after each audio:
+            // avanzarRosario();
+            // Or simply reset the play/pause button state
+            btnPlayPause.setImageResource(android.R.drawable.ic_media_play);
         });
 
         // 3. Set up button click listeners
-        buttonSiguienteOracion.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Detener el audio al avanzar manualmente
-                rosarioAudioManager.stopAudio();
-                avanzarRosario();
-            }
+        buttonSiguienteOracion.setOnClickListener(v -> {
+            // Detener el audio al avanzar manualmente
+            rosarioAudioManager.stopAudio();
+            avanzarRosario();
         });
 
-        btnPlayPause.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                togglePlayPause();
-            }
-        });
+        btnPlayPause.setOnClickListener(v -> togglePlayPause());
 
         // 4. Start the rosary display
         avanzarRosario(); // Call it once to display the first prayer
@@ -110,7 +98,7 @@ public class RosarioActivity extends AppCompatActivity {
         } else {
             // Rosario completed
             Log.d("Rosario", "¡Rosario completado!");
-            textOracionActual.setText("¡Rosario completado! Gracias por rezar con nosotros.");
+            textOracionActual.setText(R.string.rosario_completado);
             buttonSiguienteOracion.setEnabled(false);
             btnPlayPause.setEnabled(false);
             rosarioAudioManager.stopAudio(); // Ensure audio is stopped
@@ -127,23 +115,14 @@ public class RosarioActivity extends AppCompatActivity {
             rosarioAudioManager.pauseAudio();
             btnPlayPause.setImageResource(android.R.drawable.ic_media_play);
         } else {
-            // If nothing is playing, try to play the current oration's audio
-            Oracion currentOracion = rosarioLogicManager.getEtapaRosario() == 0 ?
-                    rosarioLogicManager.dataProvider.getIntroOraciones().get(rosarioLogicManager.getOracionEnEtapaIndex()) : // Fix this if intro_oraciones is not public
-                    // This part needs adjustment based on how you get the *current* Oracion from RosarioLogicManager
-                    // A better way would be for RosarioLogicManager to expose a getCurrentOracion() method.
-                    null; // Placeholder - YOU NEED TO IMPLEMENT getCurrentOracion() in RosarioLogicManager
+            // Obtener la oración actual del LogicManager
+            Oracion currentOracion = rosarioLogicManager.getCurrentOracion();
 
             if (currentOracion != null) {
                 rosarioAudioManager.playAudio(currentOracion.getAudioResId());
                 btnPlayPause.setImageResource(android.R.drawable.ic_media_pause);
             } else {
-                Log.w("RosarioActivity", "No current oration available to play/resume.");
-                // Fallback: If no current oration, try to play the one from textOracionActual.
-                // This is less robust but might work for initial testing if getCurrentOracion isn't ready.
-                // String currentText = textOracionActual.getText().toString();
-                // Integer audioResId = RosarioDataProvider.ORATION_AUDIO_MAP.get(currentText); // This map is private now
-                // if (audioResId != null) rosarioAudioManager.playAudio(audioResId);
+                Log.w("RosarioActivity", "No hay una oración actual para reproducir.");
             }
         }
     }
@@ -165,9 +144,9 @@ public class RosarioActivity extends AppCompatActivity {
             imageMisterio.setImageResource(R.drawable.rosario_general); // Default image
             textNombreMisterio.setText("");
             if (etapa == 0) {
-                textMisteriosTitulo.setText("Inicio del Rosario");
+                textMisteriosTitulo.setText(R.string.inicio_del_rosario);
             } else {
-                textMisteriosTitulo.setText("Fin del Rosario");
+                textMisteriosTitulo.setText(R.string.fin_del_rosario);
             }
         }
 

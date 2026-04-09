@@ -12,6 +12,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
+import androidx.appcompat.widget.Toolbar;
+
 public class MainActivity extends AppCompatActivity {
 
     private TextView textViewDate;
@@ -25,7 +27,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main); // Conecta la actividad con tu layout XML
+        setContentView(R.layout.activity_main);
+
+        // Configurar Toolbar
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         // 1. Enlazar elementos de UI
         textViewDate = findViewById(R.id.textView_date);
